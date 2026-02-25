@@ -33,9 +33,11 @@ function Player({ player, containerRef, onPositionChange, onRemove }) {
       onStop={handleStop}
       nodeRef={nodeRef}
     >
-      <div ref={nodeRef} className="player-card" style={{ touchAction: 'none' }}>
-        <div className="player-number">{player.id}</div>
-        <div className="player-name">{player.name}</div>
+      <div ref={nodeRef} className="player-wrapper" style={{ touchAction: 'none' }}>
+        <div className="player-avatar">
+          <div className="player-number">{player.id}</div>
+        </div>
+        <div className="player-name-label">{player.name}</div>
         <button
           onClick={() => onRemove(player.id)}
           className="remove-btn"

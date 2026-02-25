@@ -104,6 +104,17 @@
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
+.field-svg-container {
+  display: grid;
+  place-items: center;
+}
+
+.players-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: auto;
+}
+
 /* Players Grid */
 .players-grid {
   display: grid;
@@ -113,17 +124,27 @@
 }
 
 /* Player Card */
-.player-card {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+.player-wrapper {
+  width: 72px;
+  height: auto;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  transform: translate(-36px, -36px); /* center on drop point */
+}
+
+.player-avatar {
   width: 64px;
   height: 64px;
-  padding: 6px;
-  border-radius: 10px;
-  cursor: grab;
-  position: absolute;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-  transition: transform 0.12s, box-shadow 0.12s;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff6b6b 0%, #ff4757 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  border: 3px solid rgba(255,255,255,0.15);
 }
 
 .player-card:active {
@@ -132,39 +153,40 @@
 }
 
 .player-number {
-  font-size: 1.1rem;
-  font-weight: 700;
-  margin-bottom: 2px;
+  font-size: 1.2rem;
+  font-weight: 800;
 }
 
-.player-name {
-  font-size: 0.7rem;
-  word-break: break-word;
-  margin: 0;
-  display: block;
+.player-name-label {
+  font-size: 0.65rem;
+  color: #222;
   text-align: center;
+  max-width: 80px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .remove-btn {
   position: absolute;
-  top: 4px;
-  right: 4px;
-  background-color: rgba(255, 255, 255, 0.3);
+  top: -8px;
+  right: -8px;
+  background-color: rgba(0,0,0,0.6);
   border: none;
   color: white;
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   cursor: pointer;
   font-size: 0.8rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background-color 0.2s;
+  transition: transform 0.12s, background-color 0.12s;
 }
 
 .remove-btn:hover {
-  background-color: rgba(255, 255, 255, 0.6);
+  transform: scale(1.05);
 }
 
 /* Empty State */
