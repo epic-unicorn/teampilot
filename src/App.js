@@ -1,12 +1,16 @@
 import './App.css';
+import TeamSetup from './components/TeamSetup';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Hello!</h1>
-        <p>Welcome to TeamPilot</p>
+        <h1>⚽ TeamPilot</h1>
+        <p>Build your perfect lineup</p>
       </header>
+      <main className="App-main">
+        <TeamSetup />
+      </main>
     </div>
   );
 }
