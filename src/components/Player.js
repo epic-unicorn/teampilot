@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Draggable from 'react-draggable';
 
 function Player({ player, containerRef, onPositionChange, onRemove }) {
   const [pos, setPos] = useState({ x: 0, y: 0 });
+  const nodeRef = useRef(null);
 
   useEffect(() => {
     const container = containerRef?.current;
@@ -30,8 +31,9 @@ function Player({ player, containerRef, onPositionChange, onRemove }) {
       position={pos}
       bounds="parent"
       onStop={handleStop}
+      nodeRef={nodeRef}
     >
-      <div className="player-card" style={{ touchAction: 'none' }}>
+      <div ref={nodeRef} className="player-card" style={{ touchAction: 'none' }}>
         <div className="player-number">{player.id}</div>
         <div className="player-name">{player.name}</div>
         <button
