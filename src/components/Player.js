@@ -1,41 +1,48 @@
-import React from 'react';
-import { useSortable } from '@dnd-kit/sortable';
-import { CSS } from '@dnd-kit/utilities';
+import React, { useEffect, useState } from 'react';
+import Draggable from 'react-draggable';
 
-function Player({ id, name, onRemove }) {
-  const {
-    attributes,
-    listeners,
-    setNodeRef,
-    transform,
-    transition,
-    isDragging,
-  } = useSortable({ id });
+function Player({ player, containerRef, onPositionChange, onRemove }) {
+  const [pos, setPos] = useState({ x: 0, y: 0 });
 
-  const style = {
-    transform: CSS.Transform.toString(transform),
-    transition,
-    opacity: isDragging ? 0.5 : 1,
+  useEffect(() => {
+    const container = containerRef?.current;
+    if (!container) return;
+    const rect = container.getBoundingClientRect();
+    const px = player.xPercent * rect.width;
+    const py = player.yPercent * rect.height;
+    setPos({ x: Math.round(px), y: Math.round(py) });
+  }, [player.xPercent, player.yPercent, containerRef]);
+
+  const handleStop = (e, data) => {
+    const container = containerRef?.current;
+    if (!container) return;
+    const rect = container.getBoundingClientRect();
+    const newX = data.x;
+    const newY = data.y;
+    const newPercentX = Math.min(1, Math.max(0, newX / rect.width));
+    const newPercentY = Math.min(1, Math.max(0, newY / rect.height));
+    setPos({ x: newX, y: newY });
+    onPositionChange(player.id, newPercentX, newPercentY);
   };
 
   return (
-    <div
-      ref={setNodeRef}
-      style={style}
-      className="player-card"
-      {...attributes}
-      {...listeners}
+    <Draggable
+      position={pos}
+      bounds="parent"
+      onStop={handleStop}
     >
-      <div className="player-number">{id}</div>
-      <div className="player-name">{name}</div>
-      <button
-        onClick={() => onRemove(id)}
-        className="remove-btn"
-        aria-label="Remove player"
-      >
-        ✕
-      </button>
-    </div>
+      <div className="player-card" style={{ touchAction: 'none' }}>
+        <div className="player-number">{player.id}</div>
+        <div className="player-name">{player.name}</div>
+        <button
+          onClick={() => onRemove(player.id)}
+          className="remove-btn"
+          aria-label="Remove player"
+        >
+          ✕
+        </button>
+      </div>
+    </Draggable>
   );
 }
 

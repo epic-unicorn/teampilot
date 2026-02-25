@@ -10,6 +10,9 @@ function TeamSetup() {
     const newPlayer = {
       id: nextId,
       name,
+      // place new players near the bottom center by default (percent)
+      xPercent: 0.5,
+      yPercent: 0.85,
     };
     setPlayers([...players, newPlayer]);
     setNextId(nextId + 1);
