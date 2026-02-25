@@ -116,16 +116,14 @@
 .player-card {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
-  padding: 12px 8px;
-  border-radius: 8px;
+  width: 64px;
+  height: 64px;
+  padding: 6px;
+  border-radius: 10px;
   cursor: grab;
-  position: relative;
+  position: absolute;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-  transition: transform 0.2s, box-shadow 0.2s;
-  active: {
-    cursor: grabbing;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  };
+  transition: transform 0.12s, box-shadow 0.12s;
 }
 
 .player-card:active {
@@ -134,19 +132,17 @@
 }
 
 .player-number {
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-bottom: 4px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 2px;
 }
 
 .player-name {
-  font-size: 0.85rem;
+  font-size: 0.7rem;
   word-break: break-word;
-  margin-bottom: 8px;
-  min-height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  margin: 0;
+  display: block;
+  text-align: center;
 }
 
 .remove-btn {
