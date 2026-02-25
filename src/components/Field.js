@@ -85,7 +85,6 @@ function Field({ players, onPlayersChange, onRemovePlayer }) {
             <path d="M875 575 v-20 a20 20 0 0 1 20 20 z" fill="none" stroke="#f6f9ef" strokeWidth="3" />
 
           </svg>
-        </svg>
 
         <div className="players-overlay" style={{ position: 'absolute', inset: 0 }}>
           {players.map((player) => (
